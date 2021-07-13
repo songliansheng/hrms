@@ -17,7 +17,9 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
+
 /**
+  该Bean配置CORS，也可以单独创建一个类
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {

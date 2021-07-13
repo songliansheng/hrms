@@ -2,6 +2,7 @@ package icu.debris.hrms.datarest.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,8 @@ public class User {
     public String uname;
     public String sex;
     public String passwd;
-    //private Set<Role> roles = new HashSet<>();
+    @OneToMany(mappedBy = "User")
+    public Set<Role> roles;
 
     public String getUname() {
         return uname;
