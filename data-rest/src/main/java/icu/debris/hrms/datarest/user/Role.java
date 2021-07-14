@@ -1,10 +1,12 @@
 package icu.debris.hrms.datarest.user;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Role {
+public class Role implements GrantedAuthority {
     @Id
     String id;
     String roleName;
@@ -24,5 +26,10 @@ public class Role {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    @Override
+    public String getAuthority() {
+        return null;
     }
 }
