@@ -1,6 +1,8 @@
 package icu.debris.hrms.datarest.employee;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -14,6 +16,8 @@ public class Employee {
     private String job;
     private String speciality;
     private String address;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String notes;
 
@@ -89,7 +93,7 @@ public class Employee {
         this.job = job;
     }
 
-    @Id
+
     public Long getId() {
         return id;
     }
