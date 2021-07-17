@@ -1,6 +1,7 @@
 package icu.debris.hrms.security.jwt;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
@@ -26,11 +27,14 @@ public class JwtUtils {
 
 
     SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
+
+
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
     private final String jwtIssuer = "example.io";
 
     public String generateJwtToken(User user) {
-
+        System.out.println(Encoders.BASE64.encode(key.getEncoded()));
         return Jwts.builder()
                 .setSubject(format("%s", user.getUsername()))
                 .setIssuer(jwtIssuer)
@@ -51,6 +55,7 @@ public class JwtUtils {
     }
 
     public boolean validate(String token) {
+        System.out.println(Encoders.BASE64.encode(key.getEncoded()));
         try {
             Jwts.parserBuilder()
                     .setSigningKey(key)

@@ -2,6 +2,11 @@ package icu.debris.hrms.controller;
 
 import icu.debris.hrms.datarest.employee.Employee;
 import icu.debris.hrms.datarest.employee.EmployeeRepository;
+import icu.debris.hrms.security.CustomAuthenticationFailureHandler;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -29,37 +34,38 @@ public class LoginController {
     JwtUtils jwtUtils;
     @Autowired
     EmployeeRepository employeeRepository;
+//    @Autowired
+//    UserRepository userrepo;
 
     @PostMapping(value = "/login")
+//    @ExceptionHandler(CustomAuthenticationFailureHandler.class)
     /*
     ,produces = MediaType.APPLICATION_JSON_VALUE
      */
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        LogInResponse resPayload;
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        User user = (User) authentication.getPrincipal();
-        HashMap<String,String> resBody = new HashMap<>();
-        resBody.put("accessToken",jwtUtils.generateJwtToken(user));
-        resBody.put("username",user.getUsername());
-        HttpHeaders responseHeaders = new HttpHeaders();
+       try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            User user = (User) authentication.getPrincipal();
+            HashMap<String, String> resBody = new HashMap<>();
+            resBody.put("accessToken", jwtUtils.generateJwtToken(user));
+            resBody.put("username", user.getUsername());
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.AUTHORIZATION, jwtUtils.generateJwtToken(user))
+                    .body(resBody);
+        }
+       catch (AuthenticationException ex){
+           System.out.println("哎，密码错误");
+           return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
-        responseHeaders.add(HttpHeaders.AUTHORIZATION, "MyValue");
-
-        return ResponseEntity.ok()
-                //.header(HttpHeaders.AUTHORIZATION, jwtUtils.generateJwtToken(user))
-                .body(resBody);
-
-/*
-        return new ResponseEntity<>(resBody,responseHeaders, HttpStatus.OK);
-
- */
+    }
     }
 
     @GetMapping("/employees")
     public @ResponseBody List<Employee> getEmployees(){
+//        System.out.println(userrepo.findByUsername("debris404").orElse(null));
         List<Employee> employees = new ArrayList<>();
         employeeRepository.findAll().forEach(employees::add);
         return employees;

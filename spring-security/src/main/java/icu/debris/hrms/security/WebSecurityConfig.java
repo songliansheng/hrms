@@ -1,7 +1,7 @@
 package icu.debris.hrms.security;
 
 
-import icu.debris.hrms.datarest.user.UserRepository;
+import icu.debris.hrms.security.user.UserRepository;
 import icu.debris.hrms.security.AuthEntryPointJwt;
 import icu.debris.hrms.security.CustomAuthenticationFailureHandler;
 import icu.debris.hrms.security.jwt.JwtTokenFilter;
@@ -17,7 +17,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -29,6 +31,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.Arrays;
 import java.util.Collections;
+
+import static java.lang.String.format;
 
 
 @Configuration
@@ -42,8 +46,8 @@ import java.util.Collections;
 public class WebSecurityConfig
 
         extends WebSecurityConfigurerAdapter {
-    @Autowired
-    UserRepository userRepo;
+//    @Autowired
+//    UserRepository userRepo;
     @Autowired
     JwtTokenFilter jwtTokenFilter;
     @Autowired
@@ -52,7 +56,14 @@ public class WebSecurityConfig
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService());
+//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        auth.userDetailsService(userDetailsService())
+        ;
+
+//        auth.inMemoryAuthentication()
+//                .withUser("debris404")
+//                .password(encoder.encode("123456"))
+//        .roles("USER");
 
     }
 
@@ -67,9 +78,12 @@ public class WebSecurityConfig
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                //.antMatchers("/employees").permitAll()
+//                .antMatchers("/employees").hasRole("SHIT")
                 .antMatchers("/h2-console/**").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+        .and()
+        .formLogin()
+        .failureHandler(authenticationFailureHandler());
 
         http.csrf().disable();
         http.headers().frameOptions().disable();
@@ -83,10 +97,8 @@ public class WebSecurityConfig
     public UserDetailsService userDetailsService() {
         UserDetails user =
                 User.withUsername("debris404")
-
-                        .password(passwordEncoder().encode("123456"))
-                        .roles("USER")
-
+                        .password("{noop}123456")
+                        .roles("SHIT")
                         .build();
         return new InMemoryUserDetailsManager(user);
     }
@@ -97,10 +109,10 @@ public class WebSecurityConfig
         return new CustomAuthenticationFailureHandler();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//    }
 
 
     @Bean
@@ -125,7 +137,6 @@ public class WebSecurityConfig
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
 
 
 }

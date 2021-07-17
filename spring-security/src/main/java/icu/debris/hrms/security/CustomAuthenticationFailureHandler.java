@@ -1,9 +1,11 @@
 package icu.debris.hrms.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
+public class CustomAuthenticationFailureHandler  extends Throwable implements AuthenticationFailureHandler{
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
@@ -23,16 +25,17 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
             AuthenticationException exception)
             throws IOException, ServletException {
 
+        System.out.println("哎 失败了");
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        Map<String, Object> data = new HashMap<>();
-        data.put(
-                "timestamp",
-                Calendar.getInstance().getTime());
-        data.put(
-                "exception",
-                exception.getMessage());
-
-        response.getOutputStream()
-                .println(objectMapper.writeValueAsString(data));
+//        Map<String, Object> data = new HashMap<>();
+//        data.put(
+//                "timestamp",
+//                Calendar.getInstance().getTime());
+//        data.put(
+//                "exception",
+//                exception.getMessage());
+//
+//        response.getOutputStream()
+//                .println(objectMapper.writeValueAsString(data));
     }
 }
