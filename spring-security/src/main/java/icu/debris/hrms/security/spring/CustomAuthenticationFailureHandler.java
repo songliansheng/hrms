@@ -1,4 +1,4 @@
-package icu.debris.hrms.security;
+package icu.debris.hrms.security.spring;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;

@@ -1,16 +1,18 @@
-package icu.debris.hrms.security;
+package icu.debris.hrms.security.spring;
 
 
+import icu.debris.hrms.security.service.UserDetailsServiceImpl;
+import icu.debris.hrms.security.spring.AuthEntryPointJwt;
+import icu.debris.hrms.security.spring.CustomAuthenticationFailureHandler;
 import icu.debris.hrms.security.user.UserRepository;
-import icu.debris.hrms.security.AuthEntryPointJwt;
-import icu.debris.hrms.security.CustomAuthenticationFailureHandler;
 import icu.debris.hrms.security.jwt.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,11 +20,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -30,7 +30,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import static java.lang.String.format;
 
@@ -38,28 +37,38 @@ import static java.lang.String.format;
 @Configuration
 @EnableWebSecurity
 @EnableWebMvc
-@EnableGlobalMethodSecurity(
-        securedEnabled = true,
-        jsr250Enabled = true,
-        prePostEnabled = true
-)
+//@EnableGlobalMethodSecurity(
+//        securedEnabled = true,
+//        jsr250Enabled = true,
+//        prePostEnabled = true
+//)
 public class WebSecurityConfig
 
         extends WebSecurityConfigurerAdapter {
-//    @Autowired
-//    UserRepository userRepo;
+    @Autowired
+    UserRepository userRepo;
     @Autowired
     JwtTokenFilter jwtTokenFilter;
+//    @Autowired
+//    CustomUsernamePasswordAuthenticationFilter customUsernamePasswordAuthenticationFilter;
     @Autowired
     AuthEntryPointJwt unauthorizedHandler;
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        auth.userDetailsService(userDetailsService())
+//       此处的UserDetailsService的实现，与 authentication.getPrincipal()的返回值对应
+        auth.userDetailsService(
+                username ->
+                   userRepo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException( format("User: %s, not found", username))))
+//                userDetailsService()
         ;
-
+//        auth.userDetailsService(username -> userRepo.findByUsername(username).orElse(null) );
+//        auth.userDetailsService(userDetailsService)
+//                .passwordEncoder(encoder);
 //        auth.inMemoryAuthentication()
 //                .withUser("debris404")
 //                .password(encoder.encode("123456"))
@@ -70,24 +79,40 @@ public class WebSecurityConfig
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+
                 .cors()
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint(unauthorizedHandler)
+                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+//                .authenticationEntryPoint(unauthorizedHandler)
                 .and()
                 .authorizeRequests()
+
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-//                .antMatchers("/employees").hasRole("SHIT")
+                .antMatchers(HttpMethod.GET,"/employees").hasRole("ADMIN")
+//                .antMatchers("/employees").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
-        .and()
-        .formLogin()
-        .failureHandler(authenticationFailureHandler());
+//                ;
+                .and()
+                .formLogin(formLogin ->
+                                formLogin
+                                        .loginProcessingUrl("/login")
+//                        .defaultSuccessUrl("/postlogin")
+//                                .loginPage("/login")
+//                                .failureHandler(authenticationFailureHandler())
+                );
+
 
         http.csrf().disable();
         http.headers().frameOptions().disable();
+//        http.addFilterBefore(jwtTokenFilter, CustomUsernamePasswordAuthenticationFilter.class);
+//        http.addFilterAfter(customUsernamePasswordAuthenticationFilter,JwtTokenFilter2.class);
+
+//        http.addFilterAt(customUsernamePasswordAuthenticationFilter,UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
 
     }
 
@@ -98,7 +123,7 @@ public class WebSecurityConfig
         UserDetails user =
                 User.withUsername("debris404")
                         .password("{noop}123456")
-                        .roles("SHIT")
+                        .roles("ADMIN")
                         .build();
         return new InMemoryUserDetailsManager(user);
     }
@@ -121,10 +146,10 @@ public class WebSecurityConfig
         return super.authenticationManagerBean();
     }
 
-    @Bean
-    public JwtTokenFilter authenticationJwtTokenFilter() {
-        return new JwtTokenFilter();
-    }
+//    @Bean
+//    public JwtTokenFilter2 authenticationJwtTokenFilter() {
+//        return new JwtTokenFilter2();
+//    }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {

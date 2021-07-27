@@ -33,7 +33,5 @@ public class Role implements GrantedAuthority {
         return this.rolename;
     }
 
-    public Role(String rolename) {
-        this.rolename = rolename;
-    }
+
 }

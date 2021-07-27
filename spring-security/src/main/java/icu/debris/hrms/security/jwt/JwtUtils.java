@@ -12,8 +12,8 @@ import java.util.Date;
 import org.slf4j.Logger;
 
 import static java.lang.String.format;
-
-import org.springframework.security.core.userdetails.User;
+import icu.debris.hrms.security.user.User;
+//import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -56,24 +56,30 @@ public class JwtUtils {
 
     public boolean validate(String token) {
         System.out.println(Encoders.BASE64.encode(key.getEncoded()));
-        try {
+//        try
+//        {
             Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()
                     .parseClaimsJws(token);
             return true;
-        } catch (SecurityException ex) {
-            logger.error("Invalid JWT signature - {}", ex.getMessage());
-        } catch (MalformedJwtException ex) {
-            logger.error("Invalid JWT token - {}", ex.getMessage());
-        } catch (ExpiredJwtException ex) {
-            logger.error("Expired JWT token - {}", ex.getMessage());
-        } catch (UnsupportedJwtException ex) {
-            logger.error("Unsupported JWT token - {}", ex.getMessage());
-        } catch (IllegalArgumentException ex) {
-            logger.error("JWT claims string is empty - {}", ex.getMessage());
-        }
-        return false;
+//        }
+//        catch (SecurityException ex) {
+//
+//            logger.error("Invalid JWT signature - {}", ex.getMessage());
+//        } catch (MalformedJwtException ex) {
+//            logger.error("Invalid JWT token - {}", ex.getMessage());
+//        } catch (ExpiredJwtException ex) {
+//            logger.error("Expired JWT token - {}", ex.getMessage());
+//        } catch (UnsupportedJwtException ex) {
+//            logger.error("Unsupported JWT token - {}", ex.getMessage());
+//        } catch (IllegalArgumentException ex) {
+//            logger.error("JWT claims string is empty - {}", ex.getMessage());
+//        }
+//        catch (SignatureException ex){
+//            logger.error("JWT signature 無效 - {}", ex.getMessage());
+//        }
+//        return false;
     }
 
 }
