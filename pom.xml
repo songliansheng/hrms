@@ -11,23 +11,25 @@
     <groupId>icu.debris</groupId>
     <artifactId>hrms</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
     <name>hrms-back-end</name>
     <description>Demo project for Spring Boot</description>
-    <modules>
-        <module>data-rest</module>
-        <module>application</module>
-        <module>spring-security</module>
-        <module>web</module>
-    </modules>
+
 
     <properties>
         <java.version>11</java.version>
 
     </properties>
-    <dependencyManagement>
+
         <dependencies>
-            <!-- spring jpa begin  -->
+
+            <!-- enable spring security  /   -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+            </dependency>
+
+            <!-- spring data jpa begin  -->
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
@@ -35,29 +37,93 @@
                 <version>1.4.200</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-jpa</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
             </dependency>
-            <!-- spring jpa end  -->
-
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-
+                <artifactId>spring-boot-starter-data-rest</artifactId>
             </dependency>
+            <!-- spring data jpa end  -->
+
+
+            <!-- explicitly import validator /  -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+            </dependency>
+
+
+            <!-- enable jwt begin  -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>0.11.2</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>0.11.2</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
+                <version>0.11.2</version>
+                <scope>runtime</scope>
+            </dependency>
+            <!-- enable jwt end    -->
+
+
+            <!--   Java Objects to Json convertor /    -->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.8.7</version>
+            </dependency>
+
+
+
+            <!-- import DevTools,improve the development time / -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+            </dependency>
+
+            <!-- monitor、manage application in production /  -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <scope>test</scope>
-
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.20</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
             </dependency>
 
+
+
         </dependencies>
-    </dependencyManagement>
+
     <build>
         <plugins>
             <plugin>
