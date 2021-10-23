@@ -36,12 +36,11 @@ public class LoginController {
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
         User user = (User) authentication.getPrincipal();
-    //    HashMap<String, String> resBody = new HashMap<>();
-        //    resBody.put("accessToken", jwtUtils.generateJwtToken(user));
-        //   resBody.put("username", user.getUsername());
+
         LogInResponse resBody = new LogInResponse(user.getUsername(),jwtUtils.generateJwtToken(user));
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, jwtUtils.generateJwtToken(user))
+
                 .body(resBody);
     }
 
