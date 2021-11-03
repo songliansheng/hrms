@@ -14,4 +14,6 @@ To run it as a packaged application , execute java command below in a command wi
 java -jar jar-file-name.jar
 ```
 
+In order to facilitate displaying this project , data.sql file is created in folder "src/main/resources" and it will be automatically executed on startup to initialize the database .
+
  
