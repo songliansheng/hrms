@@ -9,6 +9,9 @@ This project can be run either directly from an IDE , or as a packaged applicati
 mvn package
 ```
 
-To run it as a packaged application , execute java command "java -jar jar-file-name.jar" in a command window.(Note : jar-file-name.jar here is the name of the packaged project .    
+To run it as a packaged application , execute java command below in a command window.(Note : jar-file-name.jar here is the name of the packaged project . 
+```bash
+java -jar jar-file-name.jar
+```
 
  
