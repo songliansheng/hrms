@@ -3,6 +3,7 @@
   
   After the [front-end](https://github.com/songliansheng/hrms-front-end) part is bulit , copy the created files into folder src/main/resources/static ，then this project is complete.You can run it next step.
  # Run the Application
-  This project can be run either directly from an IDE , or as a packaged Application . Since this project uses maven as build tool ，runing command "mvn package"  in a terminal window will package this project into a JAR file . Execute java command "java -jar jar-file-name.jar" in a command window to run the java application .(Note : jar-file-name.jar here is the name of the packaged project .
+  This project can be run either directly from an IDE , or as a packaged application . Since this project uses maven as build tool ，runing command "mvn package"  in a terminal window will package this project into a JAR file .
+  To run it as a packaged application , execute java command "java -jar jar-file-name.jar" in a command window.(Note : jar-file-name.jar here is the name of the packaged project .    
 
  
