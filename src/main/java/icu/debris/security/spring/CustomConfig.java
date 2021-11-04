@@ -20,29 +20,26 @@ import java.util.Map;
 public class CustomConfig {
     @Bean
     public PasswordEncoder delegatingPasswordEncoder() {
-        PasswordEncoder defaultEncoder = new SCryptPasswordEncoder();
         Map<String, PasswordEncoder> encoders = new HashMap<>();
         encoders.put("bcrypt", new BCryptPasswordEncoder());
         encoders.put("scrypt", new SCryptPasswordEncoder());
 
-        DelegatingPasswordEncoder passworEncoder = new DelegatingPasswordEncoder(
-                "bcrypt", encoders);
-        passworEncoder.setDefaultPasswordEncoderForMatches(defaultEncoder);
-
-        return passworEncoder;
+        return new DelegatingPasswordEncoder("bcrypt", encoders);
     }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080", "http://localhost:8090"));
+        configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        //这是条临时评论
         //setAllowedHeaders() must be used to make this bean take effect
         configuration.setAllowedHeaders(Arrays.asList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+    //这是条临时bean
     @Bean
     public HttpTraceRepository httpTraceRepository() {
         return new InMemoryHttpTraceRepository();

@@ -1,4 +1,4 @@
-package icu.debris.datarest.employee;
+package icu.debris.datarest.empl;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import icu.debris.datarest.job.Job;
@@ -6,7 +6,7 @@ import icu.debris.datarest.job.Job;
 import javax.persistence.*;
 
 @Entity
-public class Employee {
+public class Empl {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

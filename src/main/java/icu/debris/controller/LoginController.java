@@ -1,8 +1,8 @@
 package icu.debris.controller;
 
-import icu.debris.datarest.employee.EmployeeRepository;
+import icu.debris.datarest.empl.EmplRepo;
 import icu.debris.datarest.user.User;
-import icu.debris.datarest.user.UserRepository;
+import icu.debris.datarest.user.UserRepo;
 import icu.debris.payload.request.LoginRequest;
 import icu.debris.payload.response.LogInResponse;
 import icu.debris.security.jwt.JwtUtils;
@@ -25,9 +25,9 @@ public class LoginController {
     @Autowired
     JwtUtils jwtUtils;
     @Autowired
-    EmployeeRepository employeeRepository;
+    EmplRepo emplRepo;
     @Autowired
-    UserRepository userrepo;
+    UserRepo userrepo;
 
 
     @PostMapping(value = "/login")
@@ -36,12 +36,10 @@ public class LoginController {
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
         User user = (User) authentication.getPrincipal();
-
         LogInResponse resBody = new LogInResponse(user.getUsername(),jwtUtils.generateJwtToken(user));
         return ResponseEntity.ok()
-                .header(HttpHeaders.AUTHORIZATION, jwtUtils.generateJwtToken(user))
-
-                .body(resBody);
+                     .header(HttpHeaders.AUTHORIZATION, jwtUtils.generateJwtToken(user))
+            .body(resBody);
     }
 
 

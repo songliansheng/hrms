@@ -1,7 +1,7 @@
 package icu.debris.datarest.job;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import icu.debris.datarest.department.Department;
+import icu.debris.datarest.dept.Dept;
 
 import javax.persistence.*;
 
@@ -19,7 +19,7 @@ public class Job {
             inverseJoinColumns = @JoinColumn(name = "department_id", referencedColumnName = "id")
     )
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Department department;
+    private Dept dept;
 
     public void setId(Long id) {
         this.id = id;
@@ -36,12 +36,12 @@ public class Job {
         this.jname = jname;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Dept getDepartment() {
+        return dept;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartment(Dept dept) {
+        this.dept = dept;
     }
 
     public String getNotes() {

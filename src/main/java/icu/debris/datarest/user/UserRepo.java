@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepo extends CrudRepository<User, Long> {
     @Cacheable
     Optional<User> findByUsername(String uname);
 

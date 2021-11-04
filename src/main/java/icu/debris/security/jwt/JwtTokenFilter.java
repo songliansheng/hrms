@@ -1,7 +1,7 @@
 package icu.debris.security.jwt;
 
 import icu.debris.datarest.user.User;
-import icu.debris.datarest.user.UserRepository;
+import icu.debris.datarest.user.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,7 +26,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Autowired
     JwtUtils jwtTokenUtil;
     @Autowired
-    UserRepository userRepo;
+    UserRepo userRepo;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

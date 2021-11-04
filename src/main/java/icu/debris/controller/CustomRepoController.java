@@ -1,41 +1,40 @@
 package icu.debris.controller;
 
-import icu.debris.datarest.department.Department;
-import icu.debris.datarest.department.DepartmentRepository;
-import icu.debris.datarest.employee.Employee;
-import icu.debris.datarest.employee.EmployeeRepository;
+import icu.debris.datarest.dept.Dept;
+import icu.debris.datarest.dept.DeptRepo;
+import icu.debris.datarest.empl.Empl;
+import icu.debris.datarest.empl.EmplRepo;
 import icu.debris.datarest.job.Job;
-import icu.debris.datarest.job.JobRepository;
-import icu.debris.datarest.user.User;
-import icu.debris.datarest.user.UserRepository;
-import icu.debris.datarest.user.UserView;
+import icu.debris.datarest.job.JobRepo;
+import icu.debris.datarest.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RepositoryRestController
 public class CustomRepoController {
     @Autowired
-    EmployeeRepository empRepo;
+    EmplRepo empRepo;
     @Autowired
-    UserRepository userRepo;
+    UserRepo userRepo;
     @Autowired
-    DepartmentRepository deptRepo;
+    RoleRepo roleRepo;
     @Autowired
-    JobRepository jobRepo;
+    DeptRepo deptRepo;
+    @Autowired
+    JobRepo jobRepo;
     @Autowired
     PasswordEncoder pwdEncoder;
 
-    @GetMapping("/employees")
+    @GetMapping("/empls")
     public @ResponseBody
-    List<Employee> getEmployees() {
-        List<Employee> employees = new ArrayList<>();
-        empRepo.findAll().forEach(employees::add);
-        return employees;
+    List<Empl> getEmployees() {
+        List<Empl> empls = new ArrayList<>();
+        empRepo.findAll().forEach(empls::add);
+        return empls;
     }
 
     @GetMapping("/users")
@@ -43,20 +42,19 @@ public class CustomRepoController {
     List<UserView> getUsers() {
         return new ArrayList<>(userRepo.findBy());
     }
-
     @GetMapping("/jobs")
     public @ResponseBody
     List<Job> getJobs() {
         List<Job> jobs = new ArrayList<>();
-          jobRepo.findAll().forEach(jobs::add);
-           return jobs;
+        jobRepo.findAll().forEach(jobs::add);
+        return jobs;
 
     }
 
     @GetMapping("/depts")
     public @ResponseBody
-    List<Department> getDepartments() {
-        List<Department> depts = new ArrayList<>();
+    List<Dept> getDepartments() {
+        List<Dept> depts = new ArrayList<>();
         deptRepo.findAll().forEach(depts::add);
         return depts;
     }
@@ -64,8 +62,18 @@ public class CustomRepoController {
     @PostMapping("/users")
     public @ResponseBody
     User saveUser(@RequestBody User user) {
-        String encodedPassword = pwdEncoder.encode(user.getPassword());
+        String encodedPassword;
+        String rolename = "";
+        encodedPassword = pwdEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+        if (user.getLabel().equals("管理员"))
+            rolename = "ROLE_ADMIN";
+        if (user.getLabel().equals("普通用户"))
+            rolename = "ROLE_USER";
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepo.findByRolename(rolename));
+        user.setRoles(roles);
+
         userRepo.save(user);
         return user;
     }
@@ -73,24 +81,29 @@ public class CustomRepoController {
     @PutMapping("/users/{id}")
     public @ResponseBody
     User updateUser(@PathVariable Long id, @RequestBody User user) {
-        String encodedPassword;
+        String encodedPassword ;
         if (user.getPassword().equals("")) {
             User storedUser = userRepo.findById(id).orElse(null);
             encodedPassword = storedUser.getPassword();
         } else
             encodedPassword = pwdEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepo.findByRolename(user.getLabel()));
+        user.setRoles(roles);
+
         userRepo.save(user);
         return user;
     }
 
     @DeleteMapping("depts/{id}")
     public void deleteDepartment(@PathVariable Long id) {
-        Department department = deptRepo.findById(id).orElse(null);
-        List<Job> jobs = jobRepo.findByDepartment(department);
-        Department nullDept = null;
+        Dept dept = deptRepo.findById(id).orElse(null);
+        List<Job> jobs = jobRepo.findByDept(dept);
+        //   Department nullDept = null;
         for (Job job : jobs) {
-            job.setDepartment(nullDept);
+            job.setDepartment(null);
         }
         jobRepo.saveAll(jobs);
         deptRepo.deleteById(id);
@@ -99,12 +112,12 @@ public class CustomRepoController {
     @DeleteMapping("jobs/{id}")
     public void deleteJob(@PathVariable Long id) {
         Job job = jobRepo.findById(id).orElse(null);
-        List<Employee> employees = empRepo.findByJob(job);
-        Job nullJob = null;
-        for (Employee employee : employees) {
-            employee.setJob(nullJob);
+        List<Empl> empls = empRepo.findByJob(job);
+        //     Job nullJob = null;
+        for (Empl empl : empls) {
+            empl.setJob(null);
         }
-        empRepo.saveAll(employees);
+        empRepo.saveAll(empls);
         jobRepo.deleteById(id);
     }
 }

@@ -1,7 +1,6 @@
 package icu.debris.security.spring;
 
-
-import icu.debris.datarest.user.UserRepository;
+import icu.debris.datarest.user.UserRepo;
 import icu.debris.security.jwt.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,14 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 @Configuration
 @EnableWebSecurity
-//@EnableWebMvc
-
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    UserRepository userRepo;
+    UserRepo userRepo;
     @Autowired
     JwtTokenFilter jwtTokenFilter;
     @Autowired
@@ -49,14 +45,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/roles").permitAll()
                 .antMatchers("/users").permitAll()
                 .antMatchers("/jobs").permitAll()
+                .antMatchers("/depts").permitAll()
+                .antMatchers("/empls").permitAll()
+
                 .antMatchers("/actuator/httptrace").permitAll()
                 .antMatchers("/log").permitAll()
-                .antMatchers("/departments").permitAll()
-                .antMatchers("/employees/**").permitAll()
-                .antMatchers("/employees/*/*").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated();
 

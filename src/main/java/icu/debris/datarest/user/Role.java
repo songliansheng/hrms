@@ -12,7 +12,6 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String rolename;
-    private String role;
 
     public String getId() {
         return id;
@@ -34,11 +33,5 @@ public class Role implements GrantedAuthority {
         return this.rolename;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+    
 }

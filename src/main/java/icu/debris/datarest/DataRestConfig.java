@@ -1,7 +1,7 @@
 package icu.debris.datarest;
 
-import icu.debris.datarest.department.Department;
-import icu.debris.datarest.employee.Employee;
+import icu.debris.datarest.dept.Dept;
+import icu.debris.datarest.empl.Empl;
 import icu.debris.datarest.job.Job;
 import icu.debris.datarest.user.Role;
 import icu.debris.datarest.user.User;
@@ -13,6 +13,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 public class DataRestConfig implements RepositoryRestConfigurer {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
-        config.exposeIdsFor(Employee.class, Job.class, User.class, Department.class, Role.class);
+        config.exposeIdsFor(Empl.class, Job.class, User.class, Dept.class, Role.class);
     }
 }
