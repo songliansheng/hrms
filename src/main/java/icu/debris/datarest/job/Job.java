@@ -11,7 +11,8 @@ public class Job {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String jname;
-    private String notes;
+    public String description;
+
 
     @ManyToOne
     @JoinTable(name = "job_department",
@@ -44,11 +45,11 @@ public class Job {
         this.dept = dept;
     }
 
-    public String getNotes() {
-        return notes;
-    }
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public String getDescription() {
+        return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

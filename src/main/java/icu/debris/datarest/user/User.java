@@ -13,8 +13,9 @@ public class User implements UserDetails {
     public Long id;
     public String username;
     public String password;
-    public String description;
     public String label;
+    public String description;
+
     @Transient
     private boolean enabled = true;
     @JoinTable(name = "user_roles",

@@ -11,7 +11,8 @@ public class Dept {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String dname;
-    private String notes;
+    public String description;
+
 
     public void setId(Long id) {
         this.id = id;
@@ -29,11 +30,11 @@ public class Dept {
         this.dname = dname;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getDescription() {
+        return description;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

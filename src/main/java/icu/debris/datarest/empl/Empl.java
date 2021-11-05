@@ -17,7 +17,8 @@ public class Empl {
     private String phone;
     private String speciality;
     private String address;
-    private String note;
+    public String description;
+
 
     @ManyToOne
     @JoinTable(name = "employee_job",
@@ -100,11 +101,11 @@ public class Empl {
         this.id = id;
     }
 
-    public String getNote() {
-        return note;
+    public String getDescription() {
+        return description;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
