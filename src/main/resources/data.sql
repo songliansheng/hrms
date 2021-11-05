@@ -1,5 +1,5 @@
 
-INSERT INTO USER(username,password,label) VALUES('admin123','{bcrypt}$2a$12$KJqtKVgY78xKwOw4HecNM.wb1Uvp9fGA0M38uziOqx9BuHgKrbWiG','管理员')
+INSERT INTO USER(username,password,label) VALUES('admin123','{bcrypt}$2a$12$90LubQ.zZaaEv.Y93OSFfOGc3sqC4QBwXW.Xcd25xm4Z8/vj27Jam','管理员')
 INSERT INTO role(rolename) VALUES('ROLE_ADMIN')
 INSERT INTO role(rolename) VALUES('ROLE_USER')
 INSERT INTO user_roles VALUES(1,1)
