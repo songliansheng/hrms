@@ -19,7 +19,6 @@ import static java.lang.String.format;
 @RequiredArgsConstructor
 public class JwtUtils {
 
-    //notes: every time the app restart , the private key change;
     SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);

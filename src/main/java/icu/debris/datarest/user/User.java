@@ -22,8 +22,6 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    //这是条临时评论
-    //注意此处的 cascade = CascadeType.ALL ，没有这一条会报错
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Role> roles
             = new HashSet<>();
@@ -91,9 +89,7 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-    //这是条临时评论
 
-    //     implement UserDetails begin
 
     public Set<Role> getAuthorities() {
         return roles;
@@ -114,9 +110,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
-
-    //这是条临时评论
-//   implement UserDetails end
 
 
     public User(String username, String password, Set<Role> roles, String label) {
