@@ -20,7 +20,7 @@ public class Empl {
     public String description;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "employee_job",
             joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "job_id", referencedColumnName = "id"))

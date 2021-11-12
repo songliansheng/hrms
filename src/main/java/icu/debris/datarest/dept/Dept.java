@@ -37,4 +37,11 @@ public class Dept {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Dept(String dname, String description) {
+        this.dname = dname;
+        this.description = description;
+    }
+    public Dept() {
+    }
 }

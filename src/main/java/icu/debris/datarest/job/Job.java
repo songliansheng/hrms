@@ -14,7 +14,7 @@ public class Job {
     public String description;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "job_department",
             joinColumns = @JoinColumn(name = "job_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "department_id", referencedColumnName = "id")
@@ -37,11 +37,11 @@ public class Job {
         this.jname = jname;
     }
 
-    public Dept getDepartment() {
+    public Dept getDept() {
         return dept;
     }
 
-    public void setDepartment(Dept dept) {
+    public void setDept(Dept dept) {
         this.dept = dept;
     }
 
@@ -51,5 +51,13 @@ public class Job {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Job(String jname, String description, Dept dept) {
+        this.jname = jname;
+        this.description = description;
+        this.dept = dept;
+    }
+    public Job() {
     }
 }

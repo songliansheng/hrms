@@ -8,7 +8,11 @@ import icu.debris.datarest.job.Job;
 import icu.debris.datarest.job.JobRepo;
 import icu.debris.datarest.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.projection.ProjectionFactory;
+import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +40,6 @@ public class CustomRepoController {
         empRepo.findAll().forEach(empls::add);
         return empls;
     }
-
     @GetMapping("/users")
     public @ResponseBody
     List<UserView> getUsers() {
@@ -48,9 +51,7 @@ public class CustomRepoController {
         List<Job> jobs = new ArrayList<>();
         jobRepo.findAll().forEach(jobs::add);
         return jobs;
-
     }
-
     @GetMapping("/depts")
     public @ResponseBody
     List<Dept> getDepartments() {
@@ -59,9 +60,10 @@ public class CustomRepoController {
         return depts;
     }
 
+
     @PostMapping("/users")
     public @ResponseBody
-    User saveUser(@RequestBody User user) {
+    UserView saveUser(@RequestBody User user) {
         String encodedPassword;
         String rolename = "";
         encodedPassword = pwdEncoder.encode(user.getPassword());
@@ -73,17 +75,26 @@ public class CustomRepoController {
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepo.findByRolename(rolename));
         user.setRoles(roles);
-
         userRepo.save(user);
-        return user;
+        ProjectionFactory projectionFactory = new SpelAwareProxyProjectionFactory();
+        return projectionFactory.createProjection(UserView.class, user);
     }
+    @PostMapping("empls")
+    public @ResponseBody Empl saveEmpl(@RequestBody Empl empl){
+        if(empl.getJob().getJname().equals(""))
+            empl.setJob(null);
+        empRepo.save(empl);
+        return empl;
+    }
+
 
     @PutMapping("/users/{id}")
     public @ResponseBody
-    User updateUser(@PathVariable Long id, @RequestBody User user) {
-        String encodedPassword ;
+    UserView updateUser(@PathVariable Long id, @RequestBody User user) {
+        String encodedPassword;
         if (user.getPassword().equals("")) {
             User storedUser = userRepo.findById(id).orElse(null);
+            assert storedUser != null;
             encodedPassword = storedUser.getPassword();
         } else
             encodedPassword = pwdEncoder.encode(user.getPassword());
@@ -92,28 +103,41 @@ public class CustomRepoController {
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepo.findByRolename(user.getLabel()));
         user.setRoles(roles);
-
         userRepo.save(user);
-        return user;
+        ProjectionFactory projectionFactory = new SpelAwareProxyProjectionFactory();
+        return projectionFactory.createProjection(UserView.class, user);
+    }
+    @PutMapping("empls/{id}")
+    public @ResponseBody Empl updateEmpl(@PathVariable Long id , @RequestBody Empl empl){
+        if(empl.getJob().getJname().equals(""))
+            empl.setJob(null);
+        empRepo.save(empl);
+        return empl;
+    }
+    @PutMapping("jobs/{id}")
+    public @ResponseBody Job updateJob(@PathVariable Long id , @RequestBody Job job){
+        if(job.getDept().getDname().equals(""))
+            job.setDept(null);
+        jobRepo.save(job);
+        return job;
     }
 
+
     @DeleteMapping("depts/{id}")
-    public void deleteDepartment(@PathVariable Long id) {
+    public ResponseEntity<?> deleteDepartment(@PathVariable Long id) {
         Dept dept = deptRepo.findById(id).orElse(null);
         List<Job> jobs = jobRepo.findByDept(dept);
-        //   Department nullDept = null;
         for (Job job : jobs) {
-            job.setDepartment(null);
+            job.setDept(null);
         }
         jobRepo.saveAll(jobs);
         deptRepo.deleteById(id);
+        return ResponseEntity.status(HttpStatus.OK).body("hello");
     }
-
     @DeleteMapping("jobs/{id}")
     public void deleteJob(@PathVariable Long id) {
         Job job = jobRepo.findById(id).orElse(null);
         List<Empl> empls = empRepo.findByJob(job);
-        //     Job nullJob = null;
         for (Empl empl : empls) {
             empl.setJob(null);
         }
