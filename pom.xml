@@ -14,52 +14,32 @@
     <packaging>war</packaging>
     <name>hrms-back-end</name>
     <description>Demo project for Spring Boot</description>
-
-
     <properties>
         <java.version>11</java.version>
 
     </properties>
-
         <dependencies>
-
-            <!-- enable spring security  /   -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-security</artifactId>
-            </dependency>
-
-            <!-- spring data jpa begin  -->
-            <dependency>
-                <groupId>com.h2database</groupId>
-                <artifactId>h2</artifactId>
-                <scope>runtime</scope>
-                <version>1.4.200</version>
-            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-rest</artifactId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
             </dependency>
-            <!-- spring data jpa end  -->
-
-
-            <!-- explicitly import validator /  -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-validation</artifactId>
+                <artifactId>spring-boot-starter-security</artifactId>
             </dependency>
-
-
-            <!-- enable jwt begin  -->
             <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-api</artifactId>
-                <version>0.11.2</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-rest</artifactId>
             </dependency>
+            <dependency>
+              <groupId>io.jsonwebtoken</groupId>
+               <artifactId>jjwt-api</artifactId>
+              <version>0.11.2</version>
+           </dependency>
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-impl</artifactId>
@@ -67,61 +47,35 @@
                 <scope>runtime</scope>
             </dependency>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+            </dependency>
+            <dependency>
                 <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
+                <artifactId>jjwt-jackson</artifactId>
                 <version>0.11.2</version>
                 <scope>runtime</scope>
             </dependency>
-            <!-- enable jwt end    -->
-
-
-            <!--   Java Objects to Json convertor /    -->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <scope>runtime</scope>
+            </dependency>
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
                 <version>2.8.7</version>
             </dependency>
-
-
-
-            <!-- import DevTools,improve the development time / -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-devtools</artifactId>
             </dependency>
-
-            <!-- monitor、manage application in production /  -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-actuator</artifactId>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.18.20</version>
                 <scope>provided</scope>
             </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-            </dependency>
-
-
-
         </dependencies>
 
     <build>
@@ -129,6 +83,8 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${project.parent.version}</version>
+
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
