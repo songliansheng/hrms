@@ -5,66 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cccb6140-8a3e-48c5-9f3e-31646264db8b" name="Default Changelist" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/data.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/Application.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/controller/CustomRepoController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/controller/LoginController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/datarest/DataRestConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/datarest/dept/Dept.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/datarest/dept/DeptRepo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/datarest/empl/Empl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/datarest/empl/EmplRepo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/datarest/job/Job.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/datarest/job/JobRepo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/datarest/user/Role.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/datarest/user/RoleRepo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/datarest/user/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/datarest/user/UserRepo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/datarest/user/UserView.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/payload/request/LoginRequest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/payload/response/LogInResponse.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/security/jwt/JwtTokenFilter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/security/jwt/JwtUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/security/spring/CustomConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/security/spring/UserDetailsServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/dev/songliansheng/security/spring/WebSecurityConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/babel.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/assets/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/assets/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/models/dept.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/models/employee.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/models/job.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/models/user.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/models/utils.array.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/service/appApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/service/auth.header.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/store/auth.module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/store/dept.module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/store/errors.module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/store/job.module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/utils/event-bus.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/utils/vuetify.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/views/App.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/views/depts/DeptForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/views/depts/DeptsTab.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/views/employees/EmployeeForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/views/employees/EmployeesTab.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/views/jobs/JobForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/views/jobs/JobsTab.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/views/loginForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/views/users/UserForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/views/users/UsersTab.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/vue.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/controller/CustomRepoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/controller/CustomRepoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/datarest/DataRestConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/datarest/DataRestConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/datarest/dept/Dept.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/datarest/dept/Dept.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/datarest/dept/DeptRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/datarest/dept/DeptRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/datarest/empl/Empl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/datarest/empl/Empl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/datarest/empl/EmplRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/datarest/empl/EmplRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/datarest/job/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/datarest/job/Job.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/datarest/job/JobRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/datarest/job/JobRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/datarest/user/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/datarest/user/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/datarest/user/RoleRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/datarest/user/RoleRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/datarest/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/datarest/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/datarest/user/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/datarest/user/UserRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/datarest/user/UserView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/datarest/user/UserView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/payload/request/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/payload/request/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/payload/response/LogInResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/payload/response/LogInResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/security/jwt/JwtTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/security/jwt/JwtTokenFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/security/jwt/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/security/jwt/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/security/spring/CustomConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/security/spring/CustomConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/security/spring/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/security/spring/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/songliansheng/security/spring/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/songliansheng/hrms/security/spring/WebSecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,24 +76,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.1928994&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;105754e634c32c03aa7fdce0573c3343&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.1928994",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "spring.configuration.checksum": "105754e634c32c03aa7fdce0573c3343"
   }
-}</component>
+}]]></component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -138,7 +101,14 @@
       </set>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="hrms" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="dev.songliansheng.hrms.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="hrms" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="dev.songliansheng.Application" />
@@ -208,6 +178,7 @@
       <workItem from="1653729061963" duration="1601000" />
       <workItem from="1653730831978" duration="4401000" />
       <workItem from="1653785719781" duration="311000" />
+      <workItem from="1655263659494" duration="755000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1636018760531</created>
